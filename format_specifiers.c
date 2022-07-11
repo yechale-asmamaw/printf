@@ -1,4 +1,3 @@
-#include "main.h"
 
 /**
  * print_char - Prints character
