@@ -1,30 +1,43 @@
 #include "main.h"
-/**
- * printf_pointer - prints an hexdecimal number.
- * @val: arguments.
- * Return: counter.
- */
 int printf_pointer(va_list val)
 {
-	void *p;
-	char *s = "(nil)";
-	long int a;
-	int b;
-	int i;
+	int count = 0;
+	unsigned int a[16];
+	unsigned int i, sum;
+	unsigned long n, m;
+	char *str = "(nil)";
 
-	p = va_arg(val, void*);
-	if (p == NULL)
+	n = va_arg(val, unsigned long);
+	if (n == 0)
 	{
-		for (i = 0; s[i] != '\0'; i++)
+		for (i = 0; str[i]; i++)
 		{
-			_putchar(s[i]);
+			_putchar(str[i]);
+			count++;
 		}
-		return (i);
+		return (count);
 	}
-
-	a = (unsigned long int)p;
 	_putchar('0');
 	_putchar('x');
-	b = printf_hex_aux(a);
-	return (b + 2);
+	count = 2;
+	m = _pow(16, 15); /* 16 ^ 15 */
+	a[0] = n / m;
+	for (i = 1; i < 16; i++)
+	{
+		m /= 16;
+		a[i] = (n / m) % 16;
+	}
+	for (i = 0, sum = 0; i < 16; i++)
+	{
+		sum += a[i];
+		if (sum || i == 15)
+		{
+			if (a[i] < 10)
+				_putchar('0' + a[i]);
+			else
+				_putchar('0' + ('a' - ':') + a[i]);
+			count++;
+		}
+	}
+	return (count);
 }
