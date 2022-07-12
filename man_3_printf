@@ -1,58 +1,130 @@
-.TH man 3 "11 July 2022" "0.01" "_printf man page"
+.\" _printf man page
+.\"
+.\"
+.\"
+.\"
+.\"
+.TH _PRINTF "July 12 2022" "0.1" "Library functions manual"
 
 .SH NAME
+.SH ""
 
 .B _printf
-
-- A simple re-creation of the printf function
+- custom version for printf function.
 
 .SH SYNOPSIS
+.SH ""
 
-To use this function the #include "main.h" header is needed.
+#include "holberton.h"
+
+int _printf(const char *[FORMAT], ...);
 
 .SH DESCRIPTION
+.SH ""
 
-The _printf() function produces output according to a format which is described
 
-below. This function write its output to the stdout, the standard output stream.
+The printf function sends formatted output to stdout.
+A custom _printf() for learning purposes was developed by cohort  #9 students Jimmer and Edward Ortiz.
+_printf() function format string is a character string, beginning and ending in its initial shift state, if any. 
+These arguments are placed using the percentage '%' operator
 
-.SH USAGE
+.SS Compilation
 
-To use _printf you have to use the following key characters preceeded by % symbol.
+.P
+.RS
+#include "holberton.h"
 
-.RS 3
+$ gcc -Wall -Werror -Wextra -pedantic -Wno-format *.c
+$ gcc -Wall -Werror -Wextra -pedantic -g -Wno-format *.c (for gdb debbuging)
+.RE
 
-%c: To be used to print characters
+.SS Printing
+.RS
 
-.RS 0
+int _printf(const char *[FORMAT], ...);
 
-%s: To be used to print strings
+FORMAT is the string that takes n specifier followed by a '%'
+symbol. i.e. "Hello this is %s from %d cohort". '...' is the variadic \
+(any type of variable).
 
-.RS 0
+.SS Example
 
-%d: To print integers of max and min size of an int type
+.RS
 
-.RS 0
+.B Input
+.PP
+_printf("Hello this is %s from %d cohort\\n\\", 33);
+.PP
+.B Output
+.PP
+Hello this is %s from %d cohort
+.RE
 
-%i: To print integers of max and min size of an int type
+.SS Return Value
 
-.RS 0
+Return value is a n number of characters except NULL
 
-%b: To print a number in binary form
+.SH FLAG SPECIFIERS
+.SH ""
 
-.SH RETURN VALUES
+custom and non-custom specifier modifiers
 
-The _printf() function returns an integer representing the number of symbols
+.SH THE LENGTH MODIFIERS
+.SH ""
 
-printed not counting \\0 for the string.
+Length modifiers.
 
-.SH SEE ALSO
+.SH THE CONVERSION SPECIFIERS
+.SH ""
 
-.I printf(3)
+.RS
+Current arguments handled by conversion specifiers:
 
-.SH BUGS
+.IT
+.B %
+- % symbol is set without argument and conversion specification has to be'%%'.
 
-No known bugs.
+.IT
+.B c
+- integer or char argument converted to unsigned char.
 
-.SH AUTHOR
-Yechale Asmamaw Yirgalem Yalew
+.IT
+.B d, i
+- int argument is converted to signed decimal integer.
+
+.IT
+.B s
+- string argument. _printf handles s conversion specifier if the argument value
+ is not a pointer to a literal string. \
+
+.IT
+
+.B o, u, x, X
+- unsigned int argument converted to unsigned octal (o), unsigned decimal (u),
+unsigned hexidecimal notation (x) for lower case and (X) for upper case
+
+.IT
+.B b
+- The unsigned int argument is converted to binary.
+
+.IT
+.B p
+- The pointer is printed in hexidecimal format preceded by '0x'.
+
+.IT
+.B r, R
+- 'r' prints string in reverse. 'R' prints encrypted rot13.
+
+.IT
+.B S
+- ascii <32 & >127 has to appear in the argument string. converted to
+hexadecimal preceded by \x
+
+.RE
+
+.P
+
+.SH "AUTHORS"
+.SH ""
+
+Yirgalem Yale & Yechale aSMAMAW
